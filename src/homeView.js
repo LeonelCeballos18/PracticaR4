@@ -1,18 +1,21 @@
-import { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-import ArtistList from "./ArtistList"
-import { getMusicData } from "./api-client"
+import React, { Component } from "react";
+import { StyleSheet, View, Text } from "react-native";
 
-export default class homeView extends Component {
-    state = {
-      artists: null
-    }
+import ArtistList from "./ArtistList";
+import { getMusicData } from "./api-client";
 
-      componentDidMount(){
-        getMusicData().then(data => this.setState({ artists:data }))
-      }
+export default class homeView extends Component{
+  state = {
+    artists: null,
+  };
 
-  render(){
+  componentDidMount() {
+    getMusicData().then((data) => this.setState({ artists: data }));
+  }
+
+  render() {
+    const artists = this.state.artists;
+
     return (
       <View style={styles.container}>
         {artists && <ArtistList artists={artists} />}
@@ -24,29 +27,7 @@ export default class homeView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#eee",
+    paddingTop: 50,
   },
-  imagen: {
-    width: 250,
-    height: 250,
-    marginBottom: 30,
-  },
-  textBox: {
-    borderColor: '#1A1A1A',
-    borderRadius: 5,
-    borderWidth: 1,
-    padding: 5,
-    marginTop: 5,
-    width: 200,
-  },
-  button: {
-    padding: 10,
-    backgroundColor: '#239B56',
-    borderRadius: 5,
-  },
-  textLabel: {
-    marginTop: 5,
-  }
 });
